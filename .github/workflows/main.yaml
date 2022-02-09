@@ -1,0 +1,22 @@
+name: Playground
+
+on:
+  - push
+  - pull_request
+  - create
+  - delete
+
+jobs:
+  playground:
+    runs-on: ubuntu-latest
+    name: Playground ${{ github.event_name }}
+    steps:
+      - name: Print Event Name
+        run: echo "${{ github.event_name }}"
+
+      - name: Get Ref
+        id: get_ref
+        uses: dmsi-io/gha-get-ref@main
+
+      - name: Print Ref
+        run: echo "${{ steps.get_ref.outputs.ref_name }}"

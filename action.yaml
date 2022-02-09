@@ -1,0 +1,31 @@
+name: 'Get Ref'
+description: 'Will retrieve the acting ref name regardless of trigger'
+
+outputs:
+  ref_name:
+    description: 'Ref Name of triggering ref'
+    value: ${{ steps.get_ref.outputs.ref_name }}
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Get Ref
+      id: get_ref
+      run: |
+        if [ "${{ github.event_name }}" = "pull_request" ]; then
+          echo "::set-output name=ref_name::${{ github.head_ref }}"
+
+        elif [ "${{ github.event_name }}" = "push" ]; then
+          echo "::set-output name=ref_name::${{ github.ref_name }}"
+
+        elif [ "${{ github.event_name }}" = "create" ]; then
+          echo "::set-output name=ref_name::${{ github.ref_name }}"
+
+        elif [ "${{ github.event_name }}" = "delete" ]; then
+          echo "::set-output name=ref_name::${{ github.event.ref }}"
+
+        else
+          echo "::set-output name=ref_name::${{ github.ref_name }}"
+
+        fi
+      shell: bash
