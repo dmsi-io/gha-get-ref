@@ -1,6 +1,11 @@
 name: 'Get Ref'
 description: 'Will retrieve the acting ref name regardless of trigger'
 
+inputs:
+  custom_ref:
+    description: 'Custom Ref Name Override'
+    required: false
+
 outputs:
   ref_name:
     description: 'Ref Name of triggering ref'
@@ -12,7 +17,10 @@ runs:
     - name: Get Ref
       id: get_ref
       run: |
-        if [ "${{ github.event_name }}" = "pull_request" ]; then
+        if [ -n "${{ inputs.custom_ref }}" ]; then
+          echo "::set-output name=ref_name::${{ inputs.custom_ref }}"
+
+        elif [ "${{ github.event_name }}" = "pull_request" ]; then
           echo "::set-output name=ref_name::${{ github.head_ref }}"
 
         elif [ "${{ github.event_name }}" = "push" ]; then

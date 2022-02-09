@@ -40,3 +40,14 @@ The only output and primary purpose of this action is the ref name.
 - name: Print Ref Name
   run: echo ${{ steps.get_ref.outputs.ref_name }}
 ```
+
+### Optional Inputs
+
+#### Custom Ref Override
+
+In unique scenarios it may be useful to provide an override. This custom ref optional input allows an override to be inputted and will be returned instead of any other ref.
+
+```yaml
+with:
+  custom_ref: 'feature/custom-ref'
+```

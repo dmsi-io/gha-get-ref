@@ -20,3 +20,12 @@ jobs:
 
       - name: Print Ref
         run: echo "${{ steps.get_ref.outputs.ref_name }}"
+
+      - name: Get Custom Ref
+        id: get_custom_ref
+        uses: dmsi-io/gha-get-ref@main
+        with:
+          custom_ref: feature/custom-ref
+
+      - name: Print Ref
+        run: echo "${{ steps.get_custom_ref.outputs.ref_name }}"
