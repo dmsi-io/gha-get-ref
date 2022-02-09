@@ -9,7 +9,7 @@ on:
 jobs:
   playground:
     runs-on: ubuntu-latest
-    name: Playground ${{ github.event_name }}
+    name: Get Ref ${{ github.event_name }}
     steps:
       - name: Print Event Name
         run: echo "${{ github.event_name }}"
