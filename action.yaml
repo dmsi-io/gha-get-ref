@@ -18,22 +18,22 @@ runs:
       id: get_ref
       run: |
         if [ -n "${{ inputs.custom_ref }}" ]; then
-          echo "ref_name=${{ inputs.custom_ref }}"
+          echo "ref_name=${{ inputs.custom_ref }}" >> $GITHUB_OUTPUT
 
         elif [ "${{ github.event_name }}" = "pull_request" ]; then
-          echo "ref_name=${{ github.head_ref }}"
+          echo "ref_name=${{ github.head_ref }}" >> $GITHUB_OUTPUT
 
         elif [ "${{ github.event_name }}" = "push" ]; then
-          echo "ref_name=${{ github.ref_name }}"
+          echo "ref_name=${{ github.ref_name }}" >> $GITHUB_OUTPUT
 
         elif [ "${{ github.event_name }}" = "create" ]; then
-          echo "ref_name=${{ github.ref_name }}"
+          echo "ref_name=${{ github.ref_name }}" >> $GITHUB_OUTPUT
 
         elif [ "${{ github.event_name }}" = "delete" ]; then
-          echo "ref_name=${{ github.event.ref }}"
+          echo "ref_name=${{ github.event.ref }}" >> $GITHUB_OUTPUT
 
         else
-          echo "ref_name=${{ github.ref_name }}"
+          echo "ref_name=${{ github.ref_name }}" >> $GITHUB_OUTPUT
 
         fi
       shell: bash
