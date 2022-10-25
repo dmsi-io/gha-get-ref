@@ -4,7 +4,6 @@ on:
   - push
   - pull_request
   - create
-  - delete
 
 jobs:
   playground:
@@ -16,14 +15,14 @@ jobs:
 
       - name: Get Ref
         id: get_ref
-        uses: dmsi-io/gha-get-ref@main
+        uses: ./
 
       - name: Print Ref
         run: echo "${{ steps.get_ref.outputs.ref_name }}"
 
       - name: Get Custom Ref
         id: get_custom_ref
-        uses: dmsi-io/gha-get-ref@main
+        uses: ./
         with:
           custom_ref: feature/custom-ref
 
